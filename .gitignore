@@ -1,0 +1,6 @@
+# Ignorer les fichiers générés par l'environnement de développement
+node_modules/
+.idea/
+
+# Ignorer les fichiers de configuration contenant des mots de passe ou des informations sensibles
+.env
