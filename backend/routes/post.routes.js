@@ -1,31 +1,23 @@
 const express = require("express");
-const router = express.Router()
+const { setPosts, getPosts, editPost, deletePost, likePost, dislikePost } = require("../controllers/post.controller");
+const router = express.Router();
 
-router.get("/", (req, res) => {
-    res.json({message : "Bonjour, le serveur fonctionne correctement !"});
-  });
+// Route pour obtenir toutes les publications
+router.get("/", getPosts);
 
-router.post("/", (req, res) => {
-    res.json({message : req.body.message});
-  });
+// Route pour créer une nouvelle publication
+router.post("/", setPosts);
 
-router.put('/:id', (req, res) => {
-    res.json({messageId: req.params.id});
-  })
+// Route pour modifier une publication existante en utilisant son identifiant
+router.put('/:id', editPost);
 
-router.delete('/:id', (req, res) => {
-    res.json({messageId: "Post supprimé id " +  req.params.id});
-  })
+// Route pour supprimer une publication existante en utilisant son identifiant
+router.delete('/:id', deletePost);
 
+// Route pour liker une publication en utilisant son identifiant
+router.patch("/like-post/:id", likePost);
 
-router.patch("/like-post/:id", (req, res) => {
-    res.json({message : "Post like : id : " + req.params.id});
-})
+// Route pour ne pas liker une publication en utilisant son identifiant
+router.patch("/dislike-post/:id", dislikePost);
 
-
-router.patch("/dislike-post/:id", (req, res) => {
-    res.json({message : "Post disliké : id : " + req.params.id});
-})
-
-
-  module.exports  = router
+module.exports = router;
